@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Conlan | Writing</title>
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> 
+    <link href="./style/style.css" rel="stylesheet" type="text/css" media="all">
+    <style>
+      .stories-list {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      .story-item {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e2e8f0;
+        text-decoration: none;
+        color: #1e293b;
+        display: block;
+      }
+      
+      .story-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        border-color: #3b82f6;
+        background: #ffffff;
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      .story-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #000000;
+        margin: 0 0 10px 0;
+        line-height: 1.3;
+      }
+      
+      .story-description {
+        font-size: 15px;
+        color: #1e293b;
+        line-height: 1.4;
+        margin: 0 0 10px 0;
+      }
+      
+      .story-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        color: #1e293b;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #e2e8f0;
+      }
+      
+      .story-date {
+        font-style: italic;
+      }
+      
+      .story-length {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        color: #3b82f6;
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 500;
+        border: 1px solid #3b82f6;
+      }
+      
+      h1 {
+        text-align: center;
+        margin: 20px 0 40px 0;
+      }
+
+      @media (max-width: 768px) {
+        .stories-list {
+          padding: 15px;
+        }
+        
+        .story-item {
+          padding: 20px;
+        }
+        
+        .story-title {
+          font-size: 20px;
+        }
+        
+        .story-description {
+          font-size: 15px;
+        }
+        
+        .story-meta {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+    </style>    
+  </head>
+  <body>
+    <div id="container">
+    <div id="header">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tech.html">Tech</a></li>
+        <li><a href="artwork.html">Artwork</a></li>
+        <li><a href="writing.html">Writing</a></li>
+      </ul>
+    </div>
+    <div id="content">      
+      <p>The following are some of my notable stories from lit mags and contests.</p>
+      <div class="stories-list">
+        <!-- Stories will be generated dynamically from the storiesData array -->
+      </div>
+    </div> <!-- end of div id="content" -->
+    <div id="footer"></div>
+    </div> <!-- end of div id="container" -->
+  <script>
+    // Editable stories data array - add your stories here!
+    const storiesData = [
+      {
+        id: "story3",
+        title: "Leaving the Nest",
+        description: "TBD",
+        url: "/stories/the-memory-thief.html",
+        date: "January 10, 2024",
+        length: "Flash"
+      },
+      {
+        id: "story2",
+        title: "Earl Grey with a Spot of Milk",
+        description: "TBD",
+        url: "/stories/digital-ghosts.html",
+        date: "February 28, 2024",
+        length: "Flash"
+      },
+      {
+        id: "story4",
+        title: "See You Soon Forever",
+        description: "TBD",
+        url: "/stories/beneath-the-neon-sky.html",
+        date: "December 5, 2023",
+        length: "Flash"
+      },
+      {
+        id: "story1",
+        title: "The Lonely Lair of Skotiara",
+        description: "TBD",
+        url: "/stories/the-last-library.html",
+        date: "March 15, 2024",
+        length: "Flash"
+      }
+    ];
+
+    // Function to generate story HTML
+    function generateStoryHTML(story) {
+      return `
+        <a href="${story.url}" class="story-item">
+          <h3 class="story-title">${story.title}</h3>
+          <p class="story-description">${story.description}</p>
+          <div class="story-meta">
+            <span class="story-date">${story.date}</span>
+            <span class="story-length">${story.length}</span>
+          </div>
+        </a>
+      `;
+    }
+
+    // Generate and insert all stories when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const storiesList = document.querySelector('.stories-list');
+      storiesList.innerHTML = storiesData.map(generateStoryHTML).join('');
+    });
+  </script>
+  <script src="./script.js"></script>
+  </body>
+</html>

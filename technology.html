@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Conlan | Technology</title>
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> 
+    <link href="./style/style.css" rel="stylesheet" type="text/css" media="all">
+    <style>
+      .video-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      
+      .video-item {
+        background: #f8fafc;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+        border: 1px solid #e2e8f0;
+        flex-direction: row;
+      }
+      
+      .video-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        border-color: #3b82f6;
+        background: #ffffff;
+      }
+      
+      .video-item img {
+        width: 200px;
+        height: 112px;
+        object-fit: cover;
+        display: block;
+        flex-shrink: 0;
+      }
+      
+      .video-item h3 {
+        padding: 0;
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        color: #1e293b;
+        text-align: left;
+        font-weight: 600;
+      }
+      
+      .video-item .description {
+        font-size: 14px;
+        color: #1e293b;
+        line-height: 1.4;
+        margin: 0 0 10px 0;
+      }
+      
+      .video-item .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 0;
+      }
+      
+      .video-item .tag {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        color: #3b82f6;
+        padding: 4px 10px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 500;
+        border: 1px solid #3b82f6;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(59, 130, 246, 0.1);
+      }
+      
+      .video-item:hover .tag {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        color: #3b82f6;
+        border-color: #3b82f6;
+        box-shadow: 0 1px 3px rgba(59, 130, 246, 0.1);
+        transform: none;
+      }
+      
+      .video-item .date {
+        font-size: 14px;
+        color: #1e293b;
+        font-style: italic;
+        margin: 0 0 8px 0;
+      }
+      
+      h1 {
+        text-align: center;
+        margin: 20px 0;
+      }
+      
+      /* Mobile responsive styles */
+      @media (max-width: 768px) {
+        .video-item {
+          flex-direction: column;
+          text-align: left;
+          padding: 15px;
+        }
+        
+        .video-item img {
+          width: 100%;
+          max-width: 300px;
+          height: auto;
+          aspect-ratio: 16/9;
+          margin-bottom: 15px;
+        }
+        
+        .video-item h3 {
+          text-align: left;
+          margin-bottom: 10px;
+        }
+        
+        .video-item .description {
+          text-align: left;
+          margin-bottom: 15px;
+        }
+        
+        .video-item .tags {
+          justify-content: flex-start;
+        }
+      }
+    </style>    
+  </head>
+  <body>
+    <div id="container">
+    <div id="header">...</div>
+    <div id="content">
+      <p>Technology is magic and I dream of being a wizard.</p>
+      <div class="video-grid">
+        <!-- Videos will be generated dynamically from the videoData array -->
+      </div>
+    </div> <!-- end of div id="content" -->
+    <div id="footer"></div>
+    </div> <!-- end of div id="container" -->
+  <script>
+    // Editable video data array - add your videos here!
+    const videoData = [
+      {
+        id: "yJ_E_qGJHiU",
+        title: "Using Deep Reinforcement Learning to Play Battlesnake",
+        description: "This is a description of the first tech project. It explains what the project does and why it's interesting. You can add multiple lines of text here to describe the project in detail.",
+        tags: ["Machine Learning", "Python", "Reinforcement Learning", "Game Development"],
+        date: "April 2024"
+      },
+      {
+        id: "QMtqzqXjSFY",
+        title: "Book Scanner + Recommender", 
+        description: "This is a description of the second tech project. It explains what the project does and why it's interesting. You can add multiple lines of text here to describe the project in detail.",
+        tags: ["Computer Vision", "Machine Learning", "Mobile App", "OCR"],
+        date: "July 2024"
+      },
+      {
+        id: "hyNn1XSOtn8",
+        title: "Book \"Rate and Recommend\" Demo",
+        description: "This is a description of the third tech project. It explains what the project does and why it's interesting. You can add multiple lines of text here to describe the project in detail.",
+        tags: ["Machine Learning", "Recommendation System", "NLP", "Augmented Reality"],
+        date: "August 2024"
+      },
+      {
+        id: "6ZA2QZEEznQ",
+        title: "Tetris AI Dev Vlog 3: Image Recognition",
+        description: "This is a description of the sixth tech project. It explains what the project does and why it's interesting. You can add multiple lines of text here to describe the project in detail.",
+        tags: ["Reinforcement Learning", "Machine Learning", "Python", "Game Development"],
+        date: "October 2023"
+      },
+      {
+        id: "Iva4FoHhOi0",
+        title: "Ms Pacman Reinforcement Learning",
+        description: "This is a description of the sixth tech project. It explains what the project does and why it's interesting. You can add multiple lines of text here to describe the project in detail.",
+        tags: ["Reinforcement Learning", "Machine Learning", "Python", "Game Development"],
+        date: "December 2023"
+      },
+
+      {
+        id: "cpIyS8BCsFM",
+        title: "How I began my NFT journey as a metaverse land baron",
+        description: "This is a description of the fifth tech project. It explains what the project does and why it's interesting. You can add multiple lines of text here to describe the project in detail.",
+        tags: ["Blockchain", "NFTs", "Metaverse"],
+        date: "April 2022"
+      },
+      {
+        id: "VsCauShOLVM",
+        title: "World of Reddit",
+        description: "The browsing experience of reddit.com using virtual reality. In this reimagining, subreddits use spatial and auditory dimensions to render their content while users freely navigate the website and engage with posts in an omnidirectional manner.",
+        tags: ["Data Visualization", "Web Scraping", "Unity", "Virtual Reality"],
+        date: "October 2013"
+      },
+      {
+        id: "VUwOICsvYQ8",
+        title: "Tipover Prototype",
+        description: "This is a description of the sixth tech project. It explains what the project does and why it's interesting. You can add multiple lines of text here to describe the project in detail.",
+        tags: ["Unity", "Game Development", "Prototype"],
+        date: "August 2010"
+      },
+      {
+        id: "aViccm7dk94",
+        title: "Warhammer 40k: Space Hulk",
+        description: "This is a description of the sixth tech project. It explains what the project does and why it's interesting. You can add multiple lines of text here to describe the project in detail.",
+        tags: ["Stop Motion", "Animation", "Warhammer 40k", "Space Hulk"],
+        date: "December 2007"
+      }
+    ];
+
+    // Function to generate video HTML with fallback thumbnail
+    function generateVideoHTML(video) {
+      const tagsHTML = video.tags ? video.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : '';
+      const dateHTML = video.date ? `<p class="date">${video.date}</p>` : '';
+      
+      return `
+        <a href="https://www.youtube.com/watch?v=${video.id}" target="_blank" class="video-item">
+          <div class="content">
+            <h3>${video.title}</h3>
+            ${dateHTML}
+            <p class="description">${video.description}</p>
+            <div class="tags">${tagsHTML}</div>
+          </div>
+          <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" 
+               alt="${video.title}" 
+               onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${video.id}/mqdefault.jpg'; this.onerror=function(){this.onerror=null; this.src='https://img.youtube.com/vi/${video.id}/default.jpg';}" />
+        </a>
+      `;
+    }
+
+    // Generate and insert all videos when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const videoGrid = document.querySelector('.video-grid');
+      videoGrid.innerHTML = videoData.map(generateVideoHTML).join('');
+    });
+  </script>
+  <script src="./script.js"></script>
+  </body>
+</html>

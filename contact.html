@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Conlan | Contact</title>
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> 
+    <link href="./style/style.css" rel="stylesheet" type="text/css" media="all">
+    <style>
+      .contact-content {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      
+      .social-links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+      }
+      
+      .social-link {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e2e8f0;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      
+      .social-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        border-color: #3b82f6;
+        background: #ffffff;
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      .social-icon {
+        font-size: 24px;
+        width: 40px;
+        text-align: center;
+      }
+      
+      .social-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 18px;
+        color: #000000;
+        font-weight: 600;
+      }
+      
+      .social-info p {
+        margin: 0;
+        font-size: 14px;
+        color: #1e293b;
+      }
+      
+      @media (max-width: 768px) {
+        .contact-content {
+          padding: 15px;
+        }
+        
+        .social-links {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+        
+        .social-link {
+          padding: 15px;
+        }
+      }
+    </style>    
+  </head>
+  <body>
+    <div id="container">
+    <div id="header">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tech.html">Tech</a></li>
+        <li><a href="artwork.html">Artwork</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div id="content">
+      <p>Get in touch! I'm always interested in connecting with fellow creators, developers, and anyone passionate about technology and art.</p>
+      
+      <div class="contact-content">
+        <div class="social-links">
+          <!-- Social links will be generated dynamically from the socialData array -->
+        </div>
+      </div>
+    </div> <!-- end of div id="content" -->
+    <div id="footer"></div>
+    </div> <!-- end of div id="container" -->
+  <script>
+    // Editable social data array - add your social links here!
+    const socialData = [
+        {
+        id: "linkedin",
+        name: "LinkedIn",
+        iconUrl: "💼",
+        webUrl: "https://linkedin.com/in/conlan",
+        displayText: "linkedin.com/in/conlan"
+      },
+      {
+        id: "github",
+        name: "GitHub",
+        iconUrl: "💻",
+        webUrl: "https://github.com/conlan",
+        displayText: "github.com/conlan"
+      },
+      {
+        id: "bluesky",
+        name: "Bluesky",
+        iconUrl: "🦋",
+        webUrl: "https://bsky.app/profile/conlan.bsky.social",
+        displayText: "@conlan.bsky.social"
+      },
+      {
+        id: "youtube",
+        name: "YouTube",
+        iconUrl: "🎥",
+        webUrl: "https://www.youtube.com/conlanrios",
+        displayText: "@conlanrios"
+      }
+    ];
+
+    // Function to generate social link HTML
+    function generateSocialHTML(social) {
+      return `
+        <a href="${social.webUrl}" class="social-link" ${social.webUrl.startsWith('http') ? 'target="_blank"' : ''}>
+          <div class="social-icon">${social.iconUrl}</div>
+          <div class="social-info">
+            <h3>${social.name}</h3>
+            <p>${social.displayText}</p>
+          </div>
+        </a>
+      `;
+    }
+
+    // Generate and insert all social links when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const socialLinks = document.querySelector('.social-links');
+      socialLinks.innerHTML = socialData.map(generateSocialHTML).join('');
+    });
+  </script>
+  <script src="./script.js"></script>
+  </body>
+</html>

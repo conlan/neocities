@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Conlan | Illustration</title>
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> 
+    <link href="./style/style.css" rel="stylesheet" type="text/css" media="all">
+    <style>
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .image-item {
+        background: #f8fafc;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid #e2e8f0;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .image-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        border-color: #3b82f6;
+      }
+      
+      .image-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+      
+      .image-item {
+        aspect-ratio: 1;
+      }
+      
+      h1 {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        animation: fadeIn 0.3s ease;
+      }
+
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        max-width: 95vw;
+        max-height: 95vh;
+        position: relative;
+        animation: zoomIn 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal img {
+        max-width: 100%;
+        max-height: 80vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-info {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+        border-radius: 0 0 8px 8px;
+        margin-top: 10px;
+        max-height: 20vh;
+        overflow-y: auto;
+      }
+
+      .modal-info h3 {
+        margin: 0 0 8px 0;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .modal-info p {
+        margin: 0 0 10px 0;
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        color: white;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+        transition: color 0.3s ease;
+      }
+
+      .close:hover {
+        color: #60a5fa;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes zoomIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+
+      @media (max-width: 768px) {
+        .image-gallery {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+          padding: 15px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .image-gallery {
+          grid-template-columns: 1fr;
+          gap: 15px;
+          padding: 15px;
+        }
+        
+        .modal-content {
+          max-width: 98vw;
+          max-height: 98vh;
+        }
+        
+        .modal img {
+          max-height: 70vh;
+        }
+        
+        .modal-info {
+          max-height: 25vh;
+          padding: 15px;
+        }
+      }
+    </style>    
+  </head>
+  <body>
+    <div id="container">
+    <div id="header">...</div>
+    <div id="content">
+      <p>Explore my visual art collection featuring digital paintings, sketches, and creative projects. Each piece represents a different moment in my artistic journey and creative exploration.</p>
+      <div class="image-gallery">
+        <!-- Images will be generated dynamically from the imageData array -->
+      </div>
+    </div> <!-- end of div id="content" -->
+
+    <!-- Modal for full-size image viewing -->
+    <div id="imageModal" class="modal">
+      <span class="close">&times;</span>
+      <div class="modal-content">
+        <img id="modalImage" src="" alt="">
+        <div class="modal-info">
+          <h3 id="modalTitle"></h3>
+          <p id="modalDescription"></p>
+        </div>
+      </div>
+    </div>
+    <div id="footer"></div>
+    </div> <!-- end of div id="container" -->
+  <script>
+    // Editable image data array - add your artwork here!
+    const imageData = [
+      {
+        id: "artwork1",
+        title: "Unfinished",
+        description: "A serene digital painting of a mountain landscape at sunset, created using digital brushes and blending techniques.",
+        imageUrl: "artwork/unfinished.jpg"
+      },
+
+      {
+        id: "artwork8",
+        title: "Anniversary",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/anniversary.jpg"
+      },
+      {
+        id: "artwork2", 
+        title: "Rally at Fathi Ghaben Place",
+        description: "An experimental piece exploring color theory and geometric shapes in a modern abstract style.",
+        imageUrl: "/artwork/rally.jpg"
+      },
+      {
+        id: "artwork3",
+        title: "Portrait Study",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/courthouse.jpg"
+      },
+      {
+        id: "artwork9",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/clown.jpg"
+      },
+      {
+        id: "artwork4", 
+        title: "Abstract Composition",
+        description: "An experimental piece exploring color theory and geometric shapes in a modern abstract style.",
+        imageUrl: "/artwork/eiffel-tower.jpg"
+      },
+      {
+        id: "artwork5",
+        title: "Portrait Study",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/paris.jpg"
+      },
+      {
+        id: "artwork6",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-mission.jpg"
+      },
+      {
+        id: "artwork7",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-twinpeaks.jpg"
+      },
+      {
+        id: "artwork9",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/heaven-hell.jpg"
+      },
+      {
+        id: "artwork9",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/metal-glass.jpg"
+      },
+      {
+        id: "artwork9",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-downtown2.jpg"
+      },
+      {
+        id: "artwork10",
+        title: "Grandma's Shed",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/grandma-shed.jpg"
+      },
+      {
+        id: "artwork10",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/denver.jpg"
+      },
+      {
+        id: "artwork11",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sfbart.jpg"
+      },
+      {
+        id: "artwork12",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sendit.jpg"
+      },
+      {
+        id: "artwork13",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-house.jpg"
+      },
+      {
+        id: "artwork14",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-lamppost.jpg"
+      },
+      {
+        id: "artwork15",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-street3.jpg"
+      },
+      {
+        id: "artwork15",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-street.jpg"
+      },
+      {
+        id: "artwork16",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-downtown.jpg"
+      },
+      {
+        id: "artwork17",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-bridge.jpg"
+      },
+      {
+        id: "artwork18",
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/sf-street2.jpg"
+      }
+    ];
+
+    // Function to generate image HTML
+    function generateImageHTML(image) {
+      return `
+        <div class="image-item" onclick="openModal('${image.id}')">
+          <img src="${image.imageUrl}" alt="${image.title}" loading="lazy">
+        </div>
+      `;
+    }
+
+    // Function to open modal with image details
+    function openModal(imageId) {
+      const image = imageData.find(img => img.id === imageId);
+      if (!image) return;
+
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDescription = document.getElementById('modalDescription');
+
+      modalImage.src = image.imageUrl;
+      modalImage.alt = image.title;
+      modalTitle.textContent = image.title;
+      modalDescription.textContent = image.description;
+
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    // Function to close modal
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    // Generate and insert all images when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const imageGallery = document.querySelector('.image-gallery');
+      imageGallery.innerHTML = imageData.map(generateImageHTML).join('');
+
+      // Add event listeners for modal
+      const modal = document.getElementById('imageModal');
+      const closeBtn = document.querySelector('.close');
+
+      closeBtn.addEventListener('click', closeModal);
+      
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+          closeModal();
+        }
+      });
+    });
+  </script>
+  <script src="./script.js"></script>
+  </body>
+</html>
