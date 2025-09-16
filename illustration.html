@@ -93,13 +93,7 @@
       }
 
       .modal-info {
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 20px;
-        border-radius: 0 0 8px 8px;
-        margin-top: 10px;
-        max-height: 20vh;
-        overflow-y: auto;
+        display: none;
       }
 
       .modal-info h3 {
@@ -176,7 +170,7 @@
     <div id="container">
     <div id="header">...</div>
     <div id="content">
-      <p>I draw sometimes and recently have incorporated watercolor into my work. Nearly every piece here is based off of a photo I took.</p>
+      <p>I sometimes draw and recently have incorporated watercolor into my work. Nearly every piece here is based off of a photo I took.</p>
       <div class="image-gallery">
         <!-- Images will be generated dynamically from the imageData array -->
       </div>
@@ -197,16 +191,16 @@
     </div> <!-- end of div id="container" -->
   <script>
     // Editable image data array - add your artwork here!
-    const imageData = [
-      {
-        title: "Unfinished",
-        description: "A serene digital painting of a mountain landscape at sunset, created using digital brushes and blending techniques.",
-        imageUrl: "artwork/unfinished.jpg"
-      },
+    const imageData = [    
       {
         title: "Anniversary",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/anniversary.jpg"
+      },
+      {
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/cabin.jpg"
       },
       {
         title: "Rally at Fathi Ghaben Place",
@@ -214,9 +208,19 @@
         imageUrl: "/artwork/rally.jpg"
       },
       {
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/tents.jpg"
+      },
+      {
         title: "Portrait Study",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/courthouse.jpg"
+      },
+      {
+        title: "Unfinished",
+        description: "A serene digital painting of a mountain landscape at sunset, created using digital brushes and blending techniques.",
+        imageUrl: "artwork/unfinished.jpg"
       },
       {
         title: "Untitled",
@@ -291,12 +295,22 @@
       {
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/city4.jpg"
+      },
+      {
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-street3.jpg"
       },
       {
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-street.jpg"
+      },
+      {
+        title: "Untitled",
+        description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
+        imageUrl: "/artwork/fire-hydrant.jpg"
       },
       {
         title: "Untitled",

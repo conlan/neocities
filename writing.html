@@ -101,6 +101,42 @@
         text-align: center;
         margin: 20px 0 40px 0;
       }
+      
+      .fun-fact {
+        padding: 20px 0;
+        margin: 30px 0;
+        max-width: 100%;
+      }
+      
+      .fun-fact h3 {
+        color: #3b82f6;
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      
+      .fun-fact p {
+        margin: 0 0 15px 0;
+        color: #475569;
+      }
+      
+      .video-container {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        overflow: hidden;
+        border-radius: 8px;
+      }
+      
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
 
       @media (max-width: 768px) {
         .stories-list {
@@ -139,8 +175,17 @@
     </div>
     <div id="content">      
       <p>Some of my favorite authors include Stephen King, Richard Matheson, Octavia Butler, and Brian Evenson. The following are notable stories I've submitted to lit mags and contests—I've written more than this, but these have been validated by someone other than me.</p>
+      
       <div class="stories-list">
         <!-- Stories will be generated dynamically from the storiesData array -->
+      </div>
+      
+      <div class="fun-fact">
+        <h3>Fun fact:</h3>
+        <p>I write my first drafts with a word processor (currently an Alphasmart Neo2) to avoid distractions!</p>
+        <div class="video-container">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/1by-Fo5Mc3o?si=SJ-oBNQFe4pB0JSn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
       </div>
     </div> <!-- end of div id="content" -->
     <div id="footer"></div>
