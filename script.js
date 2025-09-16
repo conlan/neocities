@@ -51,15 +51,15 @@
     }
     
     //Generate the Header HTML, a series of list items containing links.
-    let headerHTML = '<ul> <li><a href="' + relativePath + '/index.html">Home</a></li>' + 
-    '<li><a href="' + relativePath + '/writing.html">Writing</a></li>' +
-    '<li><a href="' + relativePath + '/technology.html">Technology</a></li>' +
-    '<li><a href="' + relativePath + '/illustration.html">Illustration</a></li>' +
-    '<li><a href="' + relativePath + '/contact.html">Contact</a></li> </ul>';
+    let headerHTML = '<ul> <li><a href="/index.html">Home</a></li>' + 
+    '<li><a href="/writing.html">Writing</a></li>' +
+    '<li><a href="/technology.html">Technology</a></li>' +
+    '<li><a href="/illustration.html">Illustration</a></li>' +
+    '<li><a href="/contact.html">Contact</a></li> </ul>';
     
     //Generate the Footer HTML, which uses the variables defined in the BASIC INFO section above to list info about the site.
     //Note: feel free to remove the references to Zonelets and Neocities! Just be careful not to delete any necessary HTML closing tags or other syntax.
-    let footerHTML = "<hr><p>Built with <a href='https://zonelets.net/'>Zonelets</a>!</p>";
+    let footerHTML = "<hr><p><span class='copyleft'>©</span> 2025 Conlan Rios. Built with <a href='https://zonelets.net/'>Zonelets</a>!</p>";
     
     //To do the following stuff, we want to know where we are in the posts array (if we're currently on a post page).
     let currentIndex = -1;

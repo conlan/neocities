@@ -176,7 +176,7 @@
     <div id="container">
     <div id="header">...</div>
     <div id="content">
-      <p>Explore my visual art collection featuring digital paintings, sketches, and creative projects. Each piece represents a different moment in my artistic journey and creative exploration.</p>
+      <p>I draw sometimes and recently have incorporated watercolor into my work. Nearly every piece here is based off of a photo I took.</p>
       <div class="image-gallery">
         <!-- Images will be generated dynamically from the imageData array -->
       </div>
@@ -199,140 +199,116 @@
     // Editable image data array - add your artwork here!
     const imageData = [
       {
-        id: "artwork1",
         title: "Unfinished",
         description: "A serene digital painting of a mountain landscape at sunset, created using digital brushes and blending techniques.",
         imageUrl: "artwork/unfinished.jpg"
       },
-
       {
-        id: "artwork8",
         title: "Anniversary",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/anniversary.jpg"
       },
       {
-        id: "artwork2", 
         title: "Rally at Fathi Ghaben Place",
         description: "An experimental piece exploring color theory and geometric shapes in a modern abstract style.",
         imageUrl: "/artwork/rally.jpg"
       },
       {
-        id: "artwork3",
         title: "Portrait Study",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/courthouse.jpg"
       },
       {
-        id: "artwork9",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/clown.jpg"
       },
       {
-        id: "artwork4", 
         title: "Abstract Composition",
         description: "An experimental piece exploring color theory and geometric shapes in a modern abstract style.",
         imageUrl: "/artwork/eiffel-tower.jpg"
       },
       {
-        id: "artwork5",
         title: "Portrait Study",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/paris.jpg"
       },
       {
-        id: "artwork6",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-mission.jpg"
       },
       {
-        id: "artwork7",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-twinpeaks.jpg"
       },
       {
-        id: "artwork9",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/heaven-hell.jpg"
       },
       {
-        id: "artwork9",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/metal-glass.jpg"
       },
       {
-        id: "artwork9",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-downtown2.jpg"
       },
       {
-        id: "artwork10",
         title: "Grandma's Shed",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/grandma-shed.jpg"
       },
       {
-        id: "artwork10",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/denver.jpg"
       },
       {
-        id: "artwork11",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sfbart.jpg"
       },
       {
-        id: "artwork12",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sendit.jpg"
       },
       {
-        id: "artwork13",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-house.jpg"
       },
       {
-        id: "artwork14",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-lamppost.jpg"
       },
       {
-        id: "artwork15",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-street3.jpg"
       },
       {
-        id: "artwork15",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-street.jpg"
       },
       {
-        id: "artwork16",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-downtown.jpg"
       },
       {
-        id: "artwork17",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-bridge.jpg"
       },
       {
-        id: "artwork18",
         title: "Untitled",
         description: "A detailed portrait study focusing on lighting and facial expressions, rendered in a realistic style.",
         imageUrl: "/artwork/sf-street2.jpg"
@@ -340,17 +316,17 @@
     ];
 
     // Function to generate image HTML
-    function generateImageHTML(image) {
+    function generateImageHTML(image, index) {
       return `
-        <div class="image-item" onclick="openModal('${image.id}')">
+        <div class="image-item" onclick="openModal(${index})">
           <img src="${image.imageUrl}" alt="${image.title}" loading="lazy">
         </div>
       `;
     }
 
     // Function to open modal with image details
-    function openModal(imageId) {
-      const image = imageData.find(img => img.id === imageId);
+    function openModal(imageIndex) {
+      const image = imageData[imageIndex];
       if (!image) return;
 
       const modal = document.getElementById('imageModal');
@@ -377,7 +353,7 @@
     // Generate and insert all images when page loads
     document.addEventListener('DOMContentLoaded', function() {
       const imageGallery = document.querySelector('.image-gallery');
-      imageGallery.innerHTML = imageData.map(generateImageHTML).join('');
+      imageGallery.innerHTML = imageData.map((image, index) => generateImageHTML(image, index)).join('');
 
       // Add event listeners for modal
       const modal = document.getElementById('imageModal');

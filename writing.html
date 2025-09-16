@@ -8,71 +8,93 @@
     <link href="./style/style.css" rel="stylesheet" type="text/css" media="all">
     <style>
       .stories-list {
-        max-width: 800px;
-        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         padding: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
       }
       
       .story-item {
         background: #f8fafc;
         border-radius: 12px;
-        padding: 25px;
-        margin-bottom: 20px;
+        overflow: hidden;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
-        border: 1px solid #e2e8f0;
         text-decoration: none;
-        color: #1e293b;
-        display: block;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+        border: 1px solid #e2e8f0;
+        flex-direction: row;
       }
       
       .story-item:hover {
-        transform: translateY(-3px);
+        transform: translateY(-5px);
         box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
         border-color: #3b82f6;
         background: #ffffff;
-        text-decoration: none;
-        color: inherit;
       }
       
-      .story-title {
-        font-size: 24px;
-        font-weight: 600;
-        color: #000000;
+      .story-item h3 {
+        padding: 0;
         margin: 0 0 10px 0;
-        line-height: 1.3;
+        font-size: 18px;
+        color: #1e293b;
+        text-align: left;
+        font-weight: 600;
       }
       
-      .story-description {
-        font-size: 15px;
+      .story-item .description {
+        font-size: 14px;
         color: #1e293b;
         line-height: 1.4;
         margin: 0 0 10px 0;
       }
       
-      .story-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      .story-description::after {
+        content: "...";
+        color: #64748b;
+        font-weight: bold;
+      }
+      
+      
+      
+      .story-item .date {
         font-size: 14px;
         color: #1e293b;
-        margin-top: 15px;
-        padding-top: 15px;
-        border-top: 1px solid #e2e8f0;
-      }
-      
-      .story-date {
         font-style: italic;
+        margin: 0 0 8px 0;
       }
       
-      .story-length {
+      .story-item .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 0;
+      }
+      
+      .story-item .tag {
         background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
         color: #3b82f6;
-        padding: 4px 12px;
+        padding: 4px 10px;
         border-radius: 16px;
         font-size: 12px;
         font-weight: 500;
         border: 1px solid #3b82f6;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(59, 130, 246, 0.1);
+      }
+      
+      .story-item:hover .tag {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        color: #3b82f6;
+        border-color: #3b82f6;
+        box-shadow: 0 1px 3px rgba(59, 130, 246, 0.1);
+        transform: none;
       }
       
       h1 {
@@ -116,7 +138,7 @@
       </ul>
     </div>
     <div id="content">      
-      <p>The following are some of my notable stories from lit mags and contests.</p>
+      <p>Some of my favorite authors include Stephen King, Richard Matheson, Octavia Butler, and Brian Evenson. The following are notable stories I've submitted to lit mags and contests—I've written more than this, but these have been validated by someone other than me.</p>
       <div class="stories-list">
         <!-- Stories will be generated dynamically from the storiesData array -->
       </div>
@@ -127,48 +149,49 @@
     // Editable stories data array - add your stories here!
     const storiesData = [
       {
-        id: "story3",
         title: "Leaving the Nest",
-        description: "TBD",
-        url: "/stories/the-memory-thief.html",
-        date: "January 10, 2024",
-        length: "Flash"
+        description: "It's breakfast and I struggle to process what's playing on my son's iPad. Max, six-years old, shovels down cereal while something angular carves through the air over the fields of Eastern Europe...",
+        url: "/writing/leaving-the-nest.html",
+        date: "March 2025",
+        tags: ["Flash", "NYC Midnight"]
       },
       {
-        id: "story2",
         title: "Earl Grey with a Spot of Milk",
-        description: "TBD",
+        description: "It was the first day in a week that Carol’s masked captor hadn’t appeared at the top of the basement steps, plastic tray in hands, bearing oatmeal and steaming English tea. Both were prepared just the way she took them and she’d nearly driven herself mad attempting to figure just exactly who he was...",
         url: "/stories/digital-ghosts.html",
         date: "February 28, 2024",
-        length: "Flash"
+        tags: ["Flash", "NYC Midnight"]
       },
       {
-        id: "story4",
         title: "See You Soon Forever",
         description: "TBD",
-        url: "/stories/beneath-the-neon-sky.html",
+        url: "https://www.amazon.com/dp/B0FDGVB1SW",
         date: "December 5, 2023",
-        length: "Flash"
+        tags: ["Flash", "Sci-Fi"]
       },
       {
-        id: "story1",
         title: "The Lonely Lair of Skotiara",
         description: "TBD",
         url: "/stories/the-last-library.html",
         date: "March 15, 2024",
-        length: "Flash"
+        tags: ["Flash", "Fantasy", "NYC Midnight"]
       }
     ];
 
     // Function to generate story HTML
     function generateStoryHTML(story) {
+      const tagsHTML = story.tags ? story.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : '';
+      const dateHTML = story.date ? `<p class="date">${story.date}</p>` : '';
+      const isExternal = story.url.startsWith('http');
+      const linkAttributes = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+      
       return `
-        <a href="${story.url}" class="story-item">
-          <h3 class="story-title">${story.title}</h3>
-          <p class="story-description">${story.description}</p>
-          <div class="story-meta">
-            <span class="story-date">${story.date}</span>
-            <span class="story-length">${story.length}</span>
+        <a href="${story.url}" class="story-item" ${linkAttributes}>
+          <div class="content">
+            <h3>${story.title}</h3>
+            ${dateHTML}
+            <p class="description">${story.description}</p>
+            <div class="tags">${tagsHTML}</div>
           </div>
         </a>
       `;
